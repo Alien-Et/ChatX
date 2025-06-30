@@ -7,8 +7,9 @@ import 'package:localsend_app/config/init.dart';
 import 'package:localsend_app/config/theme.dart';
 import 'package:localsend_app/gen/strings.g.dart';
 import 'package:localsend_app/pages/home_page_controller.dart';
-import 'package:localsend_app/pages/tabs/receive_tab.dart';
-import 'package:localsend_app/pages/tabs/send_tab.dart';
+import 'package:localsend_app/pages/devices_page.dart';
+import 'package:localsend_app/pages/tabs/receive_tab.dart'; // Keep for now, might be removed later
+import 'package:localsend_app/pages/tabs/send_tab.dart'; // Keep for now, might be removed later
 import 'package:localsend_app/pages/tabs/settings_tab.dart';
 import 'package:localsend_app/provider/selection/selected_sending_files_provider.dart';
 import 'package:localsend_app/util/native/cross_file_converters.dart';
@@ -17,7 +18,7 @@ import 'package:localsend_app/widget/responsive_builder.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 
 enum HomeTab {
-  receive(Icons.wifi),
+  devices(Icons.devices), // New tab for devices
   send(Icons.send),
   settings(Icons.settings);
 
@@ -27,8 +28,8 @@ enum HomeTab {
 
   String get label {
     switch (this) {
-      case HomeTab.receive:
-        return t.receiveTab.title;
+      case HomeTab.devices:
+        return 'Devices'; // Placeholder label, will use i18n later
       case HomeTab.send:
         return t.sendTab.title;
       case HomeTab.settings:
@@ -153,7 +154,7 @@ class _HomePageState extends State<HomePage> with Refena {
                         controller: vm.controller,
                         physics: const NeverScrollableScrollPhysics(),
                         children: const [
-                          SafeArea(child: ReceiveTab()),
+                          SafeArea(child: DevicesPage()), // Use the new DevicesPage
                           SafeArea(child: SendTab()),
                           SettingsTab(),
                         ],
