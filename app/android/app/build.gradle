@@ -33,7 +33,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '19'
+        jvmTarget = '20'
     }
 
     sourceSets {
