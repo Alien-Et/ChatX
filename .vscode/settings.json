@@ -1,7 +1,0 @@
-{
-    "Lingma.cloudModelAutoTriggerGenerateLength": "long",
-    "Lingma.cloudModelManualTriggerGenerateLength": "long",
-    "Lingma.aI Chat.webToolsInAsk/AgentMode": "Auto-execute",
-    "Lingma.localMachineModel": true,
-    "Lingma.aI Chat.mcpToolsInAgentMode": true
-}

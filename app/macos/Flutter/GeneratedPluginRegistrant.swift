@@ -10,6 +10,7 @@ import connectivity_plus
 import desktop_drop
 import device_info_plus
 import dynamic_color
+import file_picker
 import file_selector_macos
 import gal
 import in_app_purchase_storekit
@@ -34,6 +35,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   DesktopDropPlugin.register(with: registry.registrar(forPlugin: "DesktopDropPlugin"))
   DeviceInfoPlusMacosPlugin.register(with: registry.registrar(forPlugin: "DeviceInfoPlusMacosPlugin"))
   DynamicColorPlugin.register(with: registry.registrar(forPlugin: "DynamicColorPlugin"))
+  FilePickerPlugin.register(with: registry.registrar(forPlugin: "FilePickerPlugin"))
   FileSelectorPlugin.register(with: registry.registrar(forPlugin: "FileSelectorPlugin"))
   GalPlugin.register(with: registry.registrar(forPlugin: "GalPlugin"))
   InAppPurchasePlugin.register(with: registry.registrar(forPlugin: "InAppPurchasePlugin"))
