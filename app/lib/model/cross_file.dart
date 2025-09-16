@@ -20,17 +20,20 @@ class CrossFile with CrossFileMappable {
   final DateTime? lastModified;
   final DateTime? lastAccessed;
 
-  // 修改主构造函数为位置参数构造函数，用于解决编译错误
-  CrossFile(this.name, {
-    this.fileType = FileType.other,
-    this.size = 0,
-    this.thumbnail,
-    this.asset,
-    this.path,
-    this.bytes,
-    this.lastModified,
-    this.lastAccessed,
-  });
+  /// 构造函数使用混合参数方式，name作为第一个位置参数，其他为命名参数
+  const CrossFile(
+    this.name,
+    {
+      required this.fileType,
+      required this.size,
+      this.thumbnail,
+      this.asset,
+      this.path,
+      this.bytes,
+      this.lastModified,
+      this.lastAccessed,
+    }
+  );
 
   // 添加一个只有一个位置参数的构造函数，用于解决编译错误
   CrossFile.single(this.name) : 

@@ -15,7 +15,7 @@ class CrossFileConverters {
   static Future<CrossFile> convertAssetEntity(AssetEntity asset) async {
     final file = (await asset.originFile)!;
     return CrossFile(
-      name: await asset.titleAsync,
+      await asset.titleAsync,
       fileType: asset.type == AssetType.video ? FileType.video : FileType.image,
       size: await file.length(),
       thumbnail: null,
@@ -29,7 +29,7 @@ class CrossFileConverters {
 
   static Future<CrossFile> convertXFile(XFile file) async {
     return CrossFile(
-      name: file.name,
+      file.name,
       fileType: file.name.guessFileType(),
       size: await file.length(),
       thumbnail: null,
@@ -43,7 +43,7 @@ class CrossFileConverters {
 
   static Future<CrossFile> convertFile(File file) async {
     return CrossFile(
-      name: file.path.fileName,
+      file.path.fileName,
       fileType: file.path.fileName.guessFileType(),
       size: await file.length(),
       thumbnail: null,
@@ -57,7 +57,7 @@ class CrossFileConverters {
 
   static Future<CrossFile> convertFileInfo(android_channel.FileInfo file) async {
     return CrossFile(
-      name: file.name,
+      file.name,
       fileType: file.name.guessFileType(),
       size: file.size,
       thumbnail: null,
@@ -73,7 +73,7 @@ class CrossFileConverters {
     final file = File(attachment.path);
     final fileName = attachment.path.fileName;
     return CrossFile(
-      name: fileName,
+      fileName,
       fileType: fileName.guessFileType(),
       size: await file.length(),
       thumbnail: null,
@@ -88,10 +88,10 @@ class CrossFileConverters {
   static Future<CrossFile> convertApplication(Application app) async {
     final file = File(app.apkFilePath);
     return CrossFile(
-      name: '${app.appName.trim()} - v${app.versionName}.apk',
+      '${app.appName.trim()} - v${app.versionName}.apk',
       fileType: FileType.apk,
-      thumbnail: app is ApplicationWithIcon ? app.icon : null,
       size: await file.length(),
+      thumbnail: app is ApplicationWithIcon ? app.icon : null,
       asset: null,
       path: app.apkFilePath,
       bytes: null,

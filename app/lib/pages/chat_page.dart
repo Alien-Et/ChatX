@@ -68,7 +68,6 @@ class _ChatPageState extends State<ChatPage> with Refena {
   void dispose() {
     _messageController.dispose();
     _scrollController.dispose();
-    ref.container.dispose(); // Add this line to clean up Refena resources
     super.dispose();
   }
 

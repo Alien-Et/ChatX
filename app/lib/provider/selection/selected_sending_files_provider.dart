@@ -43,7 +43,7 @@ class AddMessageAction extends ReduxAction<SelectedSendingFilesNotifier, List<Cr
   List<CrossFile> reduce() {
     final List<int> bytes = utf8.encode(message);
     final file = CrossFile(
-      name: '${_uuid.v4()}.txt',
+      '${_uuid.v4()}.txt',
       fileType: FileType.text,
       size: bytes.length,
       thumbnail: null,
@@ -94,7 +94,7 @@ class AddBinaryAction extends ReduxAction<SelectedSendingFilesNotifier, List<Cro
   @override
   List<CrossFile> reduce() {
     final file = CrossFile(
-      name: fileName,
+      fileName,
       fileType: fileType,
       size: bytes.length,
       thumbnail: fileType == FileType.image ? bytes : null,
@@ -173,7 +173,7 @@ class AddDirectoryAction extends AsyncReduxAction<SelectedSendingFilesNotifier, 
         _logger.info('Add file $relative');
 
         final file = CrossFile(
-          name: relative,
+          relative,
           fileType: relative.guessFileType(),
           size: entity.lengthSync(),
           thumbnail: null,
@@ -234,7 +234,7 @@ class AddAndroidDirectoryAction extends AsyncReduxAction<SelectedSendingFilesNot
       _logger.info('Add file $relative (${file.uri})');
 
       final crossFile = CrossFile(
-        name: relative,
+        relative,
         fileType: file.name.guessFileType(),
         size: file.size,
         thumbnail: null,

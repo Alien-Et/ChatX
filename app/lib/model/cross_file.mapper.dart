@@ -83,7 +83,7 @@ class CrossFileMapper extends ClassMapperBase<CrossFile> {
 
   static CrossFile _instantiate(DecodingData data) {
     return CrossFile(
-      name: data.dec(_f$name),
+      data.dec(_f$name),
       fileType: data.dec(_f$fileType),
       size: data.dec(_f$size),
       thumbnail: data.dec(_f$thumbnail),
@@ -212,7 +212,7 @@ class _CrossFileCopyWithImpl<$R, $Out>
   );
   @override
   CrossFile $make(CopyWithData data) => CrossFile(
-    name: data.get(#name, or: $value.name),
+    data.get(#name, or: $value.name),
     fileType: data.get(#fileType, or: $value.fileType),
     size: data.get(#size, or: $value.size),
     thumbnail: data.get(#thumbnail, or: $value.thumbnail),
