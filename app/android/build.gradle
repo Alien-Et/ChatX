@@ -23,25 +23,10 @@ buildscript {
     }
 }
 
-rootProject.buildDir = '../build'
+rootProject.buildDir = 'D:/ChatX/app/build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
-
-// temporary fix to keep using device_apps
-// https://stackoverflow.com/questions/69033022/message-error-resource-androidattr-lstar-not-found
-subprojects {
-    afterEvaluate { project ->
-        if (project.plugins.hasPlugin("com.android.application") ||
-                project.plugins.hasPlugin("com.android.library")) {
-            project.android {
-                compileSdkVersion 34
-                buildToolsVersion "34.0.0"
-            }
-        }
-    }
-}
-
 
 subprojects {
     project.evaluationDependsOn(':app')
@@ -49,4 +34,73 @@ subprojects {
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
+}
+
+// 解决Windows上的权限问题
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.fork = true
+        options.forkOptions.jvmArgs += [
+            '-Djava.io.tmpdir=D:/ChatX/app/build/tmp',
+            '-Duser.home=D:/ChatX/app/build/home',
+            '--add-opens=java.base/java.io=ALL-UNNAMED',
+            '--add-opens=java.base/java.lang=ALL-UNNAMED',
+            '--add-opens=java.base/java.util=ALL-UNNAMED'
+        ]
+    }
+}
+
+// 创建临时目录
+task createTempDirs {
+    doLast {
+        def tempDir = file("D:/ChatX/app/build/tmp")
+        if (!tempDir.exists()) {
+            tempDir.mkdirs()
+        }
+        def homeDir = file("D:/ChatX/app/build/home")
+        if (!homeDir.exists()) {
+            homeDir.mkdirs()
+        }
+        def gradleWorkDir = file("D:/ChatX/app/build/gradle-work")
+        if (!gradleWorkDir.exists()) {
+            gradleWorkDir.mkdirs()
+        }
+        def apkOutputDir = file("D:/ChatX/app/build/apk")
+        if (!apkOutputDir.exists()) {
+            apkOutputDir.mkdirs()
+        }
+    }
+}
+
+// 在编译前创建临时目录
+tasks.withType(JavaCompile) {
+    dependsOn createTempDirs
+}
+
+// 解决Gradle工作区移动到不可变位置的问题
+gradle.projectsEvaluated {
+    tasks.withType(org.gradle.api.tasks.Task) { task ->
+        if (task.name.contains("compile") || task.name.contains("kapt")) {
+            task.doFirst {
+                def tempDir = file("D:/ChatX/app/build/tmp")
+                if (!tempDir.exists()) {
+                    tempDir.mkdirs()
+                }
+                def homeDir = file("D:/ChatX/app/build/home")
+                if (!homeDir.exists()) {
+                    homeDir.mkdirs()
+                }
+                def gradleWorkDir = file("D:/ChatX/app/build/gradle-work")
+                if (!gradleWorkDir.exists()) {
+                    gradleWorkDir.mkdirs()
+                }
+                
+                // 设置系统属性
+                System.setProperty("java.io.tmpdir", tempDir.absolutePath)
+                System.setProperty("user.home", homeDir.absolutePath)
+                System.setProperty("gradle.user.home", "D:/ChatX/app/android/.gradle")
+                System.setProperty("gradle.workDir", gradleWorkDir.absolutePath)
+            }
+        }
+    }
 }
