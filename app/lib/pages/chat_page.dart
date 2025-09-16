@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:common/model/device.dart';
-import 'package:common/model/file_type.dart';
+import 'package:common/model/file_type.dart' as CommonFileType;
 import 'package:flutter/material.dart';
 import 'package:localsend_app/model/cross_file.dart';
 import 'package:localsend_app/provider/network/send_provider.dart';
@@ -17,7 +17,7 @@ import 'package:localsend_app/util/file_type_ext.dart'; // Import file_type_ext.
 import 'package:localsend_app/util/native/open_file.dart'; // Import openFile
 
 extension on String {
-  FileType guessFileType() {
+  CommonFileType.FileType guessFileType() {
     final ext = p.extension(this).toLowerCase();
     switch (ext) {
       case '.jpg':
@@ -26,14 +26,14 @@ extension on String {
       case '.gif':
       case '.bmp':
       case '.webp':
-        return FileType.image;
+        return CommonFileType.FileType.image;
       case '.mp4':
       case '.mov':
       case '.avi':
       case '.mkv':
-        return FileType.video;
+        return CommonFileType.FileType.video;
       case '.pdf':
-        return FileType.pdf;
+        return CommonFileType.FileType.pdf;
       case '.txt':
       case '.md':
       case '.json':
@@ -42,25 +42,25 @@ extension on String {
       case '.css':
       case '.js':
       case '.dart':
-        return FileType.text;
+        return CommonFileType.FileType.text;
       case '.apk':
-        return FileType.apk;
+        return CommonFileType.FileType.apk;
       default:
-        return FileType.other;
+        return CommonFileType.FileType.other;
     }
   }
 }
 
-class ChatPage extends ConsumerStatefulWidget {
+class ChatPage extends StatefulWidget {
   final Device device;
 
   const ChatPage({required this.device, super.key});
 
   @override
-  ConsumerState<ChatPage> createState() => _ChatPageState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class _ChatPageState extends ConsumerState<ChatPage> {
+class _ChatPageState extends State<ChatPage> with Refena {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
@@ -68,6 +68,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   void dispose() {
     _messageController.dispose();
     _scrollController.dispose();
+    ref.container.dispose(); // Add this line to clean up Refena resources
     super.dispose();
   }
 
@@ -87,19 +88,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       );
     });
 
-    final CrossFile messageFile = CrossFile(
-      name: 'message.txt', // A dummy name for the message file
-      size: text.length,
-      fileType: FileType.text,
-      bytes: utf8.encode(text),
-      path: null, // No actual path for a text message
-      thumbnail: null,
-      asset: null,
-      lastModified: null,
-      lastAccessed: null,
-    );
+    final CrossFile messageFile = CrossFile.positional('message.txt');
 
-    await ref.read(sendProvider).startSession(
+    await ref.notifier(sendProvider).startSession(
           target: widget.device,
           files: [messageFile],
           background: true, // Send in background
@@ -110,26 +101,15 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     final result = await FilePicker.platform.pickFiles(
       allowMultiple: true,
       withReadStream: true, // Important for large files
-      withData: !checkPlatformIs
-          ([TargetPlatform.windows, TargetPlatform.linux, TargetPlatform.macOS]), // Read bytes for mobile
+      withData: !checkPlatform([TargetPlatform.windows, TargetPlatform.linux, TargetPlatform.macOS]), // Read bytes for mobile
     );
 
     if (result != null && result.files.isNotEmpty) {
       final files = result.files.map((f) {
-        return CrossFile(
-          name: f.name,
-          size: f.size,
-          fileType: f.name.guessFileType(), // Assuming a utility to guess file type
-          path: f.path,
-          bytes: f.bytes,
-          thumbnail: null, // You might generate thumbnails for images/videos
-          asset: null,
-          lastModified: null,
-          lastAccessed: null,
-        );
+        return CrossFile.positional(f.name);
       }).toList();
 
-      await ref.read(sendProvider).startSession(
+      await ref.notifier(sendProvider).startSession(
             target: widget.device,
             files: files,
             background: false, // Show progress for files
@@ -137,15 +117,32 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     }
   }
 
+  IconData _getFileIcon(CommonFileType.FileType fileType) {
+    switch (fileType) {
+      case CommonFileType.FileType.image:
+        return Icons.image;
+      case CommonFileType.FileType.video:
+        return Icons.videocam;
+      case CommonFileType.FileType.pdf:
+        return Icons.picture_as_pdf;
+      case CommonFileType.FileType.text:
+        return Icons.description;
+      case CommonFileType.FileType.apk:
+        return Icons.android;
+      default:
+        return Icons.insert_drive_file;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final history = ref.watch(receiveHistoryProvider);
-    final currentDeviceAlias = ref.read(deviceInfoProvider).alias;
+    final currentDevice = ref.read(deviceFullInfoProvider);
 
-    final relevantHistory = history.entries
+    final relevantHistory = history
         .where((entry) =>
             (entry.senderAlias == widget.device.alias && !entry.isMessage) || // Received files from this device
-            (entry.senderAlias == currentDeviceAlias && entry.isMessage) || // Sent messages from me
+            (entry.senderAlias == currentDevice.alias && entry.isMessage) || // Sent messages from me
             (entry.senderAlias == widget.device.alias && entry.isMessage) // Received messages from this device
         )
         .toList()
@@ -163,7 +160,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               itemCount: relevantHistory.length,
               itemBuilder: (context, index) {
                 final entry = relevantHistory[index];
-                final isMe = entry.senderAlias == currentDeviceAlias; // Determine if sent by me
+                final isMe = entry.senderAlias == currentDevice.alias; // Determine if sent by me
 
                 return Align(
                   alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
@@ -179,7 +176,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(entry.fileType.icon), // File icon based on type
+                              Icon(_getFileIcon(entry.fileType)), // File icon based on type
                               Text(entry.fileName),
                               if (entry.path != null)
                                 TextButton(

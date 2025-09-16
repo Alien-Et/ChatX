@@ -6,7 +6,7 @@ import 'package:localsend_app/provider/device_info_provider.dart';
 import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:localsend_app/util/ui/dynamic_colors.dart';
 import 'package:refena_flutter/refena_flutter.dart';
-import 'package:yaru/yaru.dart' as yaru;
+// import 'package:yaru/yaru.dart' as yaru;
 
 final _borderRadius = BorderRadius.circular(5);
 
@@ -15,6 +15,7 @@ double get desktopPaddingFix => checkPlatformIsDesktop() ? 8 : 0;
 
 ThemeData getTheme(ColorMode colorMode, Brightness brightness, DynamicColors? dynamicColors) {
   if (colorMode == ColorMode.yaru) {
+    // 暂时使用默认主题而不是Yaru主题
     return _getYaruTheme(brightness);
   }
 
@@ -148,8 +149,11 @@ ColorScheme _determineColorScheme(ColorMode mode, Brightness brightness, Dynamic
 }
 
 ThemeData _getYaruTheme(Brightness brightness) {
-  final baseTheme = brightness == Brightness.light ? yaru.yaruLight : yaru.yaruDark;
-  final colorScheme = baseTheme.colorScheme;
+  // 使用基础主题而不是Yaru主题，以避免兼容性问题
+  final colorScheme = ColorScheme.fromSeed(
+    seedColor: Colors.teal,
+    brightness: brightness,
+  );
 
   final lightInputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: colorScheme.secondaryContainer),
@@ -161,7 +165,10 @@ ThemeData _getYaruTheme(Brightness brightness) {
     borderRadius: _borderRadius,
   );
 
-  return baseTheme.copyWith(
+  // 创建自定义主题数据，避免使用Yaru库中有问题的主题组件
+  return ThemeData(
+    colorScheme: colorScheme,
+    useMaterial3: true,
     navigationBarTheme: colorScheme.brightness == Brightness.dark
         ? NavigationBarThemeData(
             iconTheme: WidgetStateProperty.all(const IconThemeData(color: Colors.white)),
@@ -185,6 +192,11 @@ ThemeData _getYaruTheme(Brightness brightness) {
       style: TextButton.styleFrom(
         padding: checkPlatformIsDesktop() ? const EdgeInsets.all(16) : const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
+    ),
+    // 使用Material 3的底部应用栏主题
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: colorScheme.surface,
+      elevation: 3,
     ),
   );
 }

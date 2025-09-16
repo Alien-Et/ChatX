@@ -75,7 +75,7 @@ Future<RefenaContainer> preInit(List<String> args) async {
   await initI18n();
 
   bool startHidden = false;
-  if (checkPlatformIsDesktop()) {
+  if (checkPlatformIsDesktop() && !kIsWeb) {
     // Check if this app is already open and let it "show up".
     // If this is the case, then exit the current instance.
 

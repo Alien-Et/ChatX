@@ -35,9 +35,8 @@ Terminal=false
         await setLaunchAtLoginMinimized(startHidden);
         return true;
       case TargetPlatform.windows:
-        _getWindowsRegistryKey().createValue(RegistryValue(
+        _getWindowsRegistryKey().createValue(RegistryValue.string(
           _windowsRegistryKeyValue,
-          RegistryValueType.string,
           '"${Platform.resolvedExecutable}"${startHidden ? ' $startHiddenFlag' : ''}',
         ));
         return true;

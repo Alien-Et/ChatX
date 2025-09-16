@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:logging/logging.dart';
@@ -13,7 +14,7 @@ void showInitErrorApp({
 }) async {
   _logger.severe('Error during init', error, stackTrace);
 
-  if (checkPlatformIsDesktop()) {
+  if (checkPlatformIsDesktop() && !kIsWeb) {
     await WindowManager.instance.ensureInitialized();
     await WindowManager.instance.show();
   }

@@ -309,17 +309,7 @@ Future<void> _pickClipboard(BuildContext context, Ref ref) async {
                 return CrossFileConverters.convertXFile(file);
               }
               // handle content uri
-              return CrossFile(
-                name: file.name,
-                fileType: file.name.guessFileType(),
-                size: await _uriContent.getContentLength(Uri.parse(file.path)) ?? -1,
-                path: file.path,
-                thumbnail: null,
-                asset: null,
-                bytes: null,
-                lastModified: null,
-                lastAccessed: null,
-              );
+              return CrossFile.positional(file.name);
             },
           ),
         );

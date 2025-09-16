@@ -5,11 +5,16 @@ import 'package:localsend_app/provider/favorites_provider.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:localsend_app/pages/chat_page.dart';
 
-class DevicesPage extends ConsumerWidget {
+class DevicesPage extends StatefulWidget {
   const DevicesPage({super.key});
 
   @override
-  Widget build(BuildContext context, RefenaContainer ref) {
+  State<DevicesPage> createState() => _DevicesPageState();
+}
+
+class _DevicesPageState extends State<DevicesPage> with Refena {
+  @override
+  Widget build(BuildContext context) {
     final nearbyDevicesState = ref.watch(nearbyDevicesProvider);
     final favoriteDevices = ref.watch(favoritesProvider);
 

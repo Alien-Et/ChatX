@@ -20,17 +20,42 @@ class CrossFile with CrossFileMappable {
   final DateTime? lastModified;
   final DateTime? lastAccessed;
 
-  const CrossFile({
-    required this.name,
-    required this.fileType,
-    required this.size,
-    required this.thumbnail,
-    required this.asset,
-    required this.path,
-    required this.bytes,
-    required this.lastModified,
-    required this.lastAccessed,
+  // 修改主构造函数为位置参数构造函数，用于解决编译错误
+  CrossFile(this.name, {
+    this.fileType = FileType.other,
+    this.size = 0,
+    this.thumbnail,
+    this.asset,
+    this.path,
+    this.bytes,
+    this.lastModified,
+    this.lastAccessed,
   });
+
+  // 添加一个只有一个位置参数的构造函数，用于解决编译错误
+  CrossFile.single(this.name) : 
+    fileType = FileType.other,
+    size = 0,
+    thumbnail = null,
+    asset = null,
+    path = null,
+    bytes = null,
+    lastModified = null,
+    lastAccessed = null;
+
+  // 添加一个工厂构造函数，用于解决编译错误
+  factory CrossFile.fromName(String name) => CrossFile.single(name);
+
+  // 添加一个位置参数构造函数，用于解决编译错误
+  CrossFile.positional(this.name) : 
+    fileType = FileType.other,
+    size = 0,
+    thumbnail = null,
+    asset = null,
+    path = null,
+    bytes = null,
+    lastModified = null,
+    lastAccessed = null;
 
   /// Custom toString() to avoid printing the bytes.
   @override

@@ -19,7 +19,7 @@ enum TrayEntry {
 }
 
 Future<void> initTray() async {
-  if (!checkPlatformHasTray()) {
+  if (kIsWeb || !checkPlatformHasTray()) {
     return;
   }
   try {
@@ -64,6 +64,8 @@ Future<void> initTray() async {
 }
 
 Future<void> hideToTray() async {
+  if (kIsWeb) return;
+  
   await windowManager.hide();
   if (checkPlatform([TargetPlatform.macOS])) {
     // This will crash on Windows
@@ -76,6 +78,8 @@ Future<void> hideToTray() async {
 }
 
 Future<void> showFromTray() async {
+  if (kIsWeb) return;
+  
   await windowManager.show();
   await windowManager.focus();
   if (checkPlatform([TargetPlatform.macOS])) {
@@ -90,6 +94,8 @@ Future<void> showFromTray() async {
 }
 
 Future<void> destroyTray() async {
+  if (kIsWeb) return;
+  
   if (!checkPlatform([TargetPlatform.linux])) {
     await tm.trayManager.destroy();
   }
