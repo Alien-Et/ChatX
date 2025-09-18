@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:localsend_app/util/native/channel/android_channel.dart';
-import 'package:localsend_app/util/native/ios_channel.dart';
-import 'package:localsend_app/util/native/macos_channel.dart';
+import 'package:chatx/util/native/channel/android_channel.dart';
+import 'package:chatx/util/native/ios_channel.dart';
+import 'package:chatx/util/native/macos_channel.dart';
 
 Future<bool> getSystemAnimationsStatus() async {
   if (Platform.isAndroid) {

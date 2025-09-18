@@ -3,19 +3,19 @@ import 'dart:async';
 import 'package:common/model/device.dart';
 import 'package:common/model/session_status.dart';
 import 'package:flutter/material.dart';
-import 'package:localsend_app/config/theme.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/provider/device_info_provider.dart';
-import 'package:localsend_app/provider/favorites_provider.dart';
-import 'package:localsend_app/provider/network/send_provider.dart';
-import 'package:localsend_app/util/favorites.dart';
-import 'package:localsend_app/util/native/taskbar_helper.dart';
-import 'package:localsend_app/widget/animations/initial_fade_transition.dart';
-import 'package:localsend_app/widget/animations/initial_slide_transition.dart';
-import 'package:localsend_app/widget/custom_basic_appbar.dart';
-import 'package:localsend_app/widget/dialogs/error_dialog.dart';
-import 'package:localsend_app/widget/list_tile/device_list_tile.dart';
-import 'package:localsend_app/widget/responsive_list_view.dart';
+import 'package:chatx/config/theme.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/provider/device_info_provider.dart';
+import 'package:chatx/provider/favorites_provider.dart';
+import 'package:chatx/provider/network/send_provider.dart';
+import 'package:chatx/util/favorites.dart';
+import 'package:chatx/util/native/taskbar_helper.dart';
+import 'package:chatx/widget/animations/initial_fade_transition.dart';
+import 'package:chatx/widget/animations/initial_slide_transition.dart';
+import 'package:chatx/widget/custom_basic_appbar.dart';
+import 'package:chatx/widget/dialogs/error_dialog.dart';
+import 'package:chatx/widget/list_tile/device_list_tile.dart';
+import 'package:chatx/widget/responsive_list_view.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 
@@ -87,7 +87,7 @@ class _SendPageState extends State<SendPage> with Refena {
       },
       canPop: true,
       child: Scaffold(
-        appBar: widget.showAppBar ? basicLocalSendAppbar('') : null,
+        appBar: widget.showAppBar ? basicChatXAppbar('') : null,
         body: SafeArea(
           child: Center(
             child: ConstrainedBox(

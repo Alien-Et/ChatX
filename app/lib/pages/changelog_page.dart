@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:localsend_app/gen/assets.gen.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/util/ui/nav_bar_padding.dart';
-import 'package:localsend_app/widget/custom_basic_appbar.dart';
+import 'package:chatx/gen/assets.gen.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/util/ui/nav_bar_padding.dart';
+import 'package:chatx/widget/custom_basic_appbar.dart';
 
 class ChangelogPage extends StatelessWidget {
   const ChangelogPage();
@@ -12,7 +12,7 @@ class ChangelogPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: basicLocalSendAppbar(t.changelogPage.title),
+      appBar: basicChatXAppbar(t.changelogPage.title),
       body: FutureBuilder(
         future: rootBundle.loadString(Assets.changelog), // ignore: discarded_futures
         builder: (context, data) {

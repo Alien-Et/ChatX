@@ -9,18 +9,21 @@ import 'package:common/model/dto/info_dto.dart';
 import 'package:common/model/dto/receive_request_response_dto.dart';
 import 'package:common/model/file_type.dart';
 import 'package:common/util/stream.dart';
-import 'package:localsend_app/gen/assets.gen.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/model/cross_file.dart';
-import 'package:localsend_app/model/state/send/web/web_send_file.dart';
-import 'package:localsend_app/model/state/send/web/web_send_session.dart';
-import 'package:localsend_app/model/state/send/web/web_send_state.dart';
-import 'package:localsend_app/provider/device_info_provider.dart';
-import 'package:localsend_app/provider/network/server/controller/common.dart';
-import 'package:localsend_app/provider/network/server/server_utils.dart';
-import 'package:localsend_app/provider/settings_provider.dart';
-import 'package:localsend_app/util/simple_server.dart';
+import 'package:chatx/gen/assets.gen.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/model/cross_file.dart';
+import 'package:chatx/model/state/send/web/web_send_file.dart';
+import 'package:chatx/model/state/send/web/web_send_session.dart';
+import 'package:chatx/model/state/send/web/web_send_state.dart';
+import 'package:chatx/provider/device_info_provider.dart';
+import 'package:chatx/provider/network/server/controller/common.dart';
+import 'package:chatx/provider/network/server/server_utils.dart';
+import 'package:chatx/provider/settings_provider.dart';
+import 'package:chatx/util/simple_server.dart';
+import 'package:common/isolate.dart';
+import 'package:flutter/services.dart';
 import 'package:uri_content/uri_content.dart';
+import 'package:chatx/util/native/content_uri_helper.dart';
 import 'package:uuid/uuid.dart';
 
 const _uuid = Uuid();
@@ -223,7 +226,9 @@ class SendController {
         final tmpfile = File(file.path!);
         request.response.headers.set('content-length', '${tmpfile.lengthSync()}');
 
-        final fileStream = path.startsWith('content://') ? UriContent().getContentStream(Uri.parse(file.path!)) : tmpfile.openRead();
+        final resolver = AndroidUriContentStreamResolver();
+        resolver.init(rootIsolateToken: RootIsolateToken.instance!);
+        final fileStream = path.startsWith('content://') ? resolver.resolve(Uri.parse(file.path!)) : tmpfile.openRead();
         final (streamController, subscription) = fileStream.digested();
 
         await request.response.addStream(streamController.stream).then((_) {

@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:common/isolate.dart';
 import 'package:common/model/device.dart';
-import 'package:localsend_app/model/persistence/favorite_device.dart';
-import 'package:localsend_app/model/state/nearby_devices_state.dart';
-import 'package:localsend_app/provider/favorites_provider.dart';
-import 'package:localsend_app/provider/logging/discovery_logs_provider.dart';
+import 'package:chatx/model/persistence/favorite_device.dart';
+import 'package:chatx/model/state/nearby_devices_state.dart';
+import 'package:chatx/provider/favorites_provider.dart';
+import 'package:chatx/provider/logging/discovery_logs_provider.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 
 /// This provider is responsible for:

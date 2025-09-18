@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:localsend_app/config/theme.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/provider/tv_provider.dart';
+import 'package:chatx/config/theme.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/provider/tv_provider.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 

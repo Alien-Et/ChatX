@@ -15,24 +15,27 @@ import 'package:common/model/file_type.dart';
 import 'package:common/model/session_status.dart';
 import 'package:common/util/sleep.dart';
 import 'package:flutter/material.dart';
-import 'package:localsend_app/model/cross_file.dart';
-import 'package:localsend_app/model/send_mode.dart';
-import 'package:localsend_app/model/state/send/send_session_state.dart';
-import 'package:localsend_app/model/state/send/sending_file.dart';
-import 'package:localsend_app/pages/home_page.dart';
-import 'package:localsend_app/pages/progress_page.dart';
-import 'package:localsend_app/pages/send_page.dart';
-import 'package:localsend_app/provider/device_info_provider.dart';
-import 'package:localsend_app/provider/http_provider.dart';
-import 'package:localsend_app/provider/progress_provider.dart';
-import 'package:localsend_app/provider/selection/selected_sending_files_provider.dart';
-import 'package:localsend_app/provider/settings_provider.dart';
-import 'package:localsend_app/widget/dialogs/pin_dialog.dart';
+import 'package:chatx/model/cross_file.dart';
+import 'package:chatx/model/send_mode.dart';
+import 'package:chatx/model/state/send/send_session_state.dart';
+import 'package:chatx/model/state/send/sending_file.dart';
+import 'package:chatx/pages/home_page.dart';
+import 'package:chatx/pages/progress_page.dart';
+import 'package:chatx/pages/send_page.dart';
+import 'package:chatx/provider/device_info_provider.dart';
+import 'package:chatx/provider/http_provider.dart';
+import 'package:chatx/provider/progress_provider.dart';
+import 'package:chatx/provider/selection/selected_sending_files_provider.dart';
+import 'package:chatx/provider/settings_provider.dart';
+import 'package:chatx/widget/dialogs/pin_dialog.dart';
 import 'package:logging/logging.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:rhttp/rhttp.dart';
 import 'package:routerino/routerino.dart';
+import 'package:common/isolate.dart';
+import 'package:flutter/services.dart';
 import 'package:uri_content/uri_content.dart';
+import 'package:chatx/util/native/content_uri_helper.dart';
 import 'package:uuid/uuid.dart';
 
 const _uuid = Uuid();
@@ -382,7 +385,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
     }
   }
 
-  final uriContent = UriContent();
+  final uriContent = AndroidUriContentStreamResolver();
 
   /// Sends a file.
   /// Returns true, if the next file should be sent.

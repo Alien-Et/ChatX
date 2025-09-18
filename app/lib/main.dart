@@ -2,23 +2,23 @@ import 'package:common/isolate.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:localsend_app/config/init.dart';
-import 'package:localsend_app/config/init_error.dart';
-import 'package:localsend_app/config/theme.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/model/persistence/color_mode.dart';
-import 'package:localsend_app/pages/home_page.dart';
-import 'package:localsend_app/provider/local_ip_provider.dart';
-import 'package:localsend_app/provider/settings_provider.dart';
-import 'package:localsend_app/util/ui/dynamic_colors.dart';
-import 'package:localsend_app/widget/watcher/life_cycle_watcher.dart';
-import 'package:localsend_app/widget/watcher/shortcut_watcher.dart';
+import 'package:chatx/config/init.dart';
+import 'package:chatx/config/init_error.dart';
+import 'package:chatx/config/theme.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/model/persistence/color_mode.dart';
+import 'package:chatx/pages/home_page.dart';
+import 'package:chatx/provider/local_ip_provider.dart';
+import 'package:chatx/provider/settings_provider.dart';
+import 'package:chatx/util/ui/dynamic_colors.dart';
+import 'package:chatx/widget/watcher/life_cycle_watcher.dart';
+import 'package:chatx/widget/watcher/shortcut_watcher.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 
 // 条件导入平台特定的组件
-import 'package:localsend_app/widget/watcher/tray_watcher.dart' if (dart.library.html) 'package:localsend_app/widget/watcher/tray_watcher_web.dart';
-import 'package:localsend_app/widget/watcher/window_watcher.dart' if (dart.library.html) 'package:localsend_app/widget/watcher/window_watcher_web.dart';
+import 'package:chatx/widget/watcher/tray_watcher.dart' if (dart.library.html) 'package:chatx/widget/watcher/tray_watcher_web.dart';
+import 'package:chatx/widget/watcher/window_watcher.dart' if (dart.library.html) 'package:chatx/widget/watcher/window_watcher_web.dart';
 
 Future<void> main(List<String> args) async {
   final RefenaContainer container;
@@ -35,13 +35,13 @@ Future<void> main(List<String> args) async {
   runApp(RefenaScope.withContainer(
     container: container,
     child: TranslationProvider(
-      child: const LocalSendApp(),
+      child: const ChatXApp(),
     ),
   ));
 }
 
-class LocalSendApp extends StatelessWidget {
-  const LocalSendApp();
+class ChatXApp extends StatelessWidget {
+  const ChatXApp();
 
   @override
   Widget build(BuildContext context) {

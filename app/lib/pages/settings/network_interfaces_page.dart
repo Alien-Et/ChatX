@@ -3,12 +3,12 @@ import 'package:common/util/network_interfaces.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:local_hero/local_hero.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/provider/settings_provider.dart';
-import 'package:localsend_app/widget/custom_basic_appbar.dart';
-import 'package:localsend_app/widget/dialogs/text_field_tv.dart';
-import 'package:localsend_app/widget/labeled_checkbox.dart';
-import 'package:localsend_app/widget/responsive_list_view.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/provider/settings_provider.dart';
+import 'package:chatx/widget/custom_basic_appbar.dart';
+import 'package:chatx/widget/dialogs/text_field_tv.dart';
+import 'package:chatx/widget/labeled_checkbox.dart';
+import 'package:chatx/widget/responsive_list_view.dart';
 import 'package:moform/moform.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 
@@ -44,7 +44,7 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
         ? context.notifier(settingsProvider).setNetworkWhitelist
         : context.notifier(settingsProvider).setNetworkBlacklist;
     return Scaffold(
-      appBar: basicLocalSendAppbar(t.networkInterfacesPage.title),
+      appBar: basicChatXAppbar(t.networkInterfacesPage.title),
       body: LocalHeroScope(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,

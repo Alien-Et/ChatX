@@ -1,11 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/pages/debug/debug_page.dart';
-import 'package:localsend_app/widget/custom_basic_appbar.dart';
-import 'package:localsend_app/widget/local_send_logo.dart';
-import 'package:localsend_app/widget/responsive_list_view.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/pages/debug/debug_page.dart';
+import 'package:chatx/widget/custom_basic_appbar.dart';
+import 'package:chatx/widget/local_send_logo.dart';
+import 'package:chatx/widget/responsive_list_view.dart';
 import 'package:routerino/routerino.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,12 +24,12 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
     return Scaffold(
-      appBar: basicLocalSendAppbar(t.aboutPage.title),
+      appBar: basicChatXAppbar(t.aboutPage.title),
       body: ResponsiveListView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         children: [
           const SizedBox(height: 20),
-          const LocalSendLogo(withText: true),
+          const ChatXLogo(withText: true),
           Text(
             '© ${DateTime.now().year} Tien Do Nam',
             textAlign: TextAlign.center,

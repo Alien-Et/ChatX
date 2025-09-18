@@ -4,17 +4,17 @@ import 'dart:io';
 import 'package:common/model/device.dart';
 import 'package:common/model/file_type.dart' as CommonFileType;
 import 'package:flutter/material.dart';
-import 'package:localsend_app/model/cross_file.dart';
-import 'package:localsend_app/provider/network/send_provider.dart';
-import 'package:localsend_app/provider/receive_history_provider.dart';
-import 'package:localsend_app/provider/selection/selected_sending_files_provider.dart';
-import 'package:localsend_app/util/native/platform_check.dart';
+import 'package:chatx/model/cross_file.dart';
+import 'package:chatx/provider/network/send_provider.dart';
+import 'package:chatx/provider/receive_history_provider.dart';
+import 'package:chatx/provider/selection/selected_sending_files_provider.dart';
+import 'package:chatx/util/native/platform_check.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:file_picker/file_picker.dart'; // For file selection
-import 'package:localsend_app/provider/device_info_provider.dart'; // Import deviceInfoProvider
+import 'package:chatx/provider/device_info_provider.dart'; // Import deviceInfoProvider
 import 'package:path/path.dart' as p; // For path operations
-import 'package:localsend_app/util/file_type_ext.dart'; // Import file_type_ext.dart for .icon
-import 'package:localsend_app/util/native/open_file.dart'; // Import openFile
+import 'package:chatx/util/file_type_ext.dart'; // Import file_type_ext.dart for .icon
+import 'package:chatx/util/native/open_file.dart'; // Import openFile
 
 extension on String {
   CommonFileType.FileType guessFileType() {

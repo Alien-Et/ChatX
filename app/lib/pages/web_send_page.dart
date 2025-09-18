@@ -1,19 +1,19 @@
 import 'package:common/util/sleep.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:localsend_app/config/theme.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/model/cross_file.dart';
-import 'package:localsend_app/provider/local_ip_provider.dart';
-import 'package:localsend_app/provider/network/server/server_provider.dart';
-import 'package:localsend_app/provider/settings_provider.dart';
-import 'package:localsend_app/util/native/platform_check.dart';
-import 'package:localsend_app/util/ui/snackbar.dart';
-import 'package:localsend_app/widget/custom_basic_appbar.dart';
-import 'package:localsend_app/widget/dialogs/pin_dialog.dart';
-import 'package:localsend_app/widget/dialogs/qr_dialog.dart';
-import 'package:localsend_app/widget/dialogs/zoom_dialog.dart';
-import 'package:localsend_app/widget/responsive_list_view.dart';
+import 'package:chatx/config/theme.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/model/cross_file.dart';
+import 'package:chatx/provider/local_ip_provider.dart';
+import 'package:chatx/provider/network/server/server_provider.dart';
+import 'package:chatx/provider/settings_provider.dart';
+import 'package:chatx/util/native/platform_check.dart';
+import 'package:chatx/util/ui/snackbar.dart';
+import 'package:chatx/widget/custom_basic_appbar.dart';
+import 'package:chatx/widget/dialogs/pin_dialog.dart';
+import 'package:chatx/widget/dialogs/qr_dialog.dart';
+import 'package:chatx/widget/dialogs/zoom_dialog.dart';
+import 'package:chatx/widget/responsive_list_view.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 
@@ -100,7 +100,7 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
       },
       canPop: false,
       child: Scaffold(
-        appBar: basicLocalSendAppbar(t.webSharePage.title),
+        appBar: basicChatXAppbar(t.webSharePage.title),
         body: Builder(
           builder: (context) {
             if (_stateEnum != _ServerState.running) {

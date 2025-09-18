@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:common/model/device.dart';
-import 'package:localsend_app/provider/network/nearby_devices_provider.dart';
-import 'package:localsend_app/provider/favorites_provider.dart';
+import 'package:chatx/provider/network/nearby_devices_provider.dart';
+import 'package:chatx/provider/favorites_provider.dart';
 import 'package:refena_flutter/refena_flutter.dart';
-import 'package:localsend_app/pages/chat_page.dart';
+import 'package:chatx/pages/chat_page.dart';
 
 class DevicesPage extends StatefulWidget {
   const DevicesPage({super.key});

@@ -3,18 +3,18 @@ import 'dart:io';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
-import 'package:localsend_app/config/init.dart';
-import 'package:localsend_app/config/theme.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/pages/home_page_controller.dart';
-import 'package:localsend_app/pages/devices_page.dart';
-import 'package:localsend_app/pages/tabs/receive_tab.dart'; // Keep for now, might be removed later
-import 'package:localsend_app/pages/tabs/send_tab.dart'; // Keep for now, might be removed later
-import 'package:localsend_app/pages/tabs/settings_tab.dart';
-import 'package:localsend_app/provider/selection/selected_sending_files_provider.dart';
-import 'package:localsend_app/util/native/cross_file_converters.dart';
-import 'package:localsend_app/util/native/platform_check.dart';
-import 'package:localsend_app/widget/responsive_builder.dart';
+import 'package:chatx/config/init.dart';
+import 'package:chatx/config/theme.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/pages/home_page_controller.dart';
+import 'package:chatx/pages/devices_page.dart';
+import 'package:chatx/pages/tabs/receive_tab.dart'; // Keep for now, might be removed later
+import 'package:chatx/pages/tabs/send_tab.dart'; // Keep for now, might be removed later
+import 'package:chatx/pages/tabs/settings_tab.dart';
+import 'package:chatx/provider/selection/selected_sending_files_provider.dart';
+import 'package:chatx/util/native/cross_file_converters.dart';
+import 'package:chatx/util/native/platform_check.dart';
+import 'package:chatx/widget/responsive_builder.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 
 enum HomeTab {

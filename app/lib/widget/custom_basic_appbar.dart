@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:localsend_app/util/native/platform_check.dart';
+import 'package:chatx/util/native/platform_check.dart';
 
 class CustomBackButton extends StatelessWidget {
   final Color? color;
@@ -27,7 +27,7 @@ class CustomBackButton extends StatelessWidget {
   }
 }
 
-PreferredSizeWidget basicLocalSendAppbar(String title) {
+PreferredSizeWidget basicChatXAppbar(String title) {
   // Creates a very simple new appBar to support bitsdojo_windows on mac and make them draggable
   // if you want have more items on here for a specific page, make sure to add it here as an option
   // so that mac users can still appreciate this near native new design

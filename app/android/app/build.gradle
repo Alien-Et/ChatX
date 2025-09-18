@@ -41,7 +41,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.localsend.localsend_app"
+        applicationId "org.chatx.chatx_app"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()

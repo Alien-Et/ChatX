@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/model/state/purchase_state.dart';
-import 'package:localsend_app/pages/donation/donation_page_vm.dart';
+import 'package:chatx/gen/strings.g.dart';
+import 'package:chatx/model/state/purchase_state.dart';
+import 'package:chatx/pages/donation/donation_page_vm.dart';
 // [FOSS_REMOVE_START]
-import 'package:localsend_app/provider/purchase_provider.dart';
-import 'package:localsend_app/widget/custom_basic_appbar.dart';
+import 'package:chatx/provider/purchase_provider.dart';
+import 'package:chatx/widget/custom_basic_appbar.dart';
 // [FOSS_REMOVE_END]
-import 'package:localsend_app/widget/responsive_list_view.dart';
+import 'package:chatx/widget/responsive_list_view.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -22,7 +22,7 @@ class DonationPage extends StatelessWidget {
       // [FOSS_REMOVE_END]
       builder: (context, vm) {
         return Scaffold(
-          appBar: basicLocalSendAppbar(t.donationPage.title),
+          appBar: basicChatXAppbar(t.donationPage.title),
           body: Stack(
             children: [
               ResponsiveListView(

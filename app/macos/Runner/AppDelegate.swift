@@ -34,7 +34,7 @@ class AppDelegate: FlutterAppDelegate {
     private var isLaunchedAsLoginItem: Bool?
     
     override func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        // LocalSend handles the close event manually
+        // ChatX handles the close event manually
         return false
     }
     
@@ -45,8 +45,8 @@ class AppDelegate: FlutterAppDelegate {
         
         self.setupDockIconTextDropEventListener()
         
-        let localsendBrandColor = NSColor(red: 0, green: 0.392, blue: 0.353, alpha: 0.8) // #00645a
-        DockProgress.style = .squircle(color: localsendBrandColor)
+        let chatxBrandColor = NSColor(red: 0, green: 0.392, blue: 0.353, alpha: 0.8) // #00645a
+        DockProgress.style = .squircle(color: chatxBrandColor)
         
         isLaunchedAsLoginItem = LaunchAtLogin.wasLaunchedAtLogin
         
@@ -103,7 +103,7 @@ class AppDelegate: FlutterAppDelegate {
             let menu = NSMenu()
             
             let openString = i18n["open"]!
-            let openItem = NSMenuItem(title: openString, action: #selector(showLocalSendFromMenuBar), keyEquivalent: "o")
+            let openItem = NSMenuItem(title: openString, action: #selector(showChatXFromMenuBar), keyEquivalent: "o")
             menu.addItem(openItem)
             
             let quitString = i18n["quit"]!
@@ -125,8 +125,8 @@ class AppDelegate: FlutterAppDelegate {
         }
     }
     
-    @objc func showLocalSendFromMenuBar() {
-        channel?.invokeMethod("showLocalSendFromMenuBar", arguments: nil)
+    @objc func showChatXFromMenuBar() {
+        channel?.invokeMethod("showChatXFromMenuBar", arguments: nil)
     }
     
     @objc private func quitApp() {
@@ -154,7 +154,7 @@ class AppDelegate: FlutterAppDelegate {
         Defaults[.pendingFiles] = []
         Defaults[.pendingStrings] = []
         
-        self.showLocalSendFromMenuBar()
+        self.showChatXFromMenuBar()
     }
     
     // START: handle opened files
